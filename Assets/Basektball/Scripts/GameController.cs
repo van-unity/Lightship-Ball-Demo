@@ -9,6 +9,8 @@ namespace Basektball.Scripts {
     public class GameController : MonoBehaviour {
         public HoopManager _hoopManager;
         public GameObject _ballPrefab;
+        public GameObject _cloudPrefab;
+        
         public Transform _ballPositionTransform;
         public float _zMultiplier = 1;
         public float _yMultiplier = 1;
