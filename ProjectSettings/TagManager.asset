@@ -3,7 +3,22 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Rim
+  - Board
+  - NetFrontColliders
+  - Goal
+  - SlowMotionTrigger
+  - IdealShotPosition
+  - Net
+  - HoopCenter
+  - OutsideNet
+  - NetBone
+  - Ball
+  - BlueGoal
+  - RedGoal
+  - BackboardSpot
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -14,7 +29,7 @@ TagManager:
   - 
   - 
   - ARDK_MockWorld
-  - 
+  - Ball
   - 
   - 
   - 

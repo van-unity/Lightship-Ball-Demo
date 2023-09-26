@@ -147,8 +147,8 @@ namespace Ballerz.Presentation {
             _rigidbody.velocity = Vector3.zero;
             _rigidbody.angularVelocity = Vector3.zero;
             _transform.rotation = Quaternion.identity;
-            _rigidbody.useGravity = false;
             _rigidbody.interpolation = RigidbodyInterpolation.None;
+            _rigidbody.useGravity = false;
             _collider.enabled = false;
             _groundCollisionCount = 0;
             _rimCollisionCount = 0;
@@ -160,41 +160,41 @@ namespace Ballerz.Presentation {
         private float _dragStartTime;
 
         public void OnDrag(PointerEventData eventData) {
-            var mousePosition = eventData.position;
-            if (mousePosition.y > _screenPosition.y * 2) {
-                return;
-            }
-            var position = UnityEngine.Camera.main
-                .ScreenToWorldPoint(new Vector3(_screenPosition.x, mousePosition.y,
-                    _screenPosition.z));
-            if (mousePosition.y <= _screenPosition.y) {
-                _transform.position = position;
-            }
-
-            var horizontalDrag = .5f - UnityEngine.Camera.main.ScreenToViewportPoint(eventData.position).x;
-            // UnityEngine.Camera.main.transform.rotation = Quaternion.Euler(0, horizontalDrag * 30f, 0);
-
-            var y = (_screenPosition.y - mousePosition.y) / _screenPosition.y;
-            var z = y;
-            var x = horizontalDrag / .5f;
-            var throwDirection = new Vector3(x, y, z);
+            // var mousePosition = eventData.position;
+            // if (mousePosition.y > _screenPosition.y * 2) {
+            //     return;
+            // }
+            // var position = UnityEngine.Camera.main
+            //     .ScreenToWorldPoint(new Vector3(_screenPosition.x, mousePosition.y,
+            //         _screenPosition.z));
+            // if (mousePosition.y <= _screenPosition.y) {
+            //     _transform.position = position;
+            // }
+            //
+            // var horizontalDrag = .5f - UnityEngine.Camera.main.ScreenToViewportPoint(eventData.position).x;
+            // // UnityEngine.Camera.main.transform.rotation = Quaternion.Euler(0, horizontalDrag * 30f, 0);
+            //
+            // var y = (_screenPosition.y - mousePosition.y) / _screenPosition.y;
+            // var z = y;
+            // var x = horizontalDrag / .5f;
+            // var throwDirection = new Vector3(x, y, z);
         }
 
         public void OnBeginDrag(PointerEventData eventData) {
-            _dragStartTime = Time.time;
+            // _dragStartTime = Time.time;
         }
 
         public void OnEndDrag(PointerEventData eventData) {
-            var mousePosition = eventData.position;
-            if (mousePosition.y > _screenPosition.y * 2) {
-                mousePosition.y = _screenPosition.y * 2;
-            }
-
-            var r = .5f - UnityEngine.Camera.main.ScreenToViewportPoint(mousePosition).x;
-            var y = (_screenPosition.y - mousePosition.y) / _screenPosition.y;
-            var z = y;
-            var x = r / .5f;
-            var throwDirection = new Vector3(x, y, z);
+            // var mousePosition = eventData.position;
+            // if (mousePosition.y > _screenPosition.y * 2) {
+            //     mousePosition.y = _screenPosition.y * 2;
+            // }
+            //
+            // var r = .5f - UnityEngine.Camera.main.ScreenToViewportPoint(mousePosition).x;
+            // var y = (_screenPosition.y - mousePosition.y) / _screenPosition.y;
+            // var z = y;
+            // var x = r / .5f;
+            // var throwDirection = new Vector3(x, y, z);
         }
 
         public void SetParent(Transform parent) {
