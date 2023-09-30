@@ -27,6 +27,8 @@ namespace Ballerz.Presentation {
         private HoopManager _hoopManager;
         private Vector3 _screenPosition;
 
+        public static event Action<Ball> TriggeredWithCloud;
+
         public Vector3 Position {
             get => _transform.position;
             set {
@@ -92,6 +94,9 @@ namespace Ballerz.Presentation {
                 var velocity = _hoopManager.GetIdealShotPosition() - Position;
                 Rigidbody.velocity = Vector3.zero;
                 Rigidbody.AddForce(velocity, ForceMode.Impulse);
+            }
+            else if(other.CompareTag("Cloud")) {
+                TriggeredWithCloud?.Invoke(this);
             }
         }
 

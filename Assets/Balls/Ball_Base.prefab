@@ -10,11 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8388626461285932008}
   - component: {fileID: -2199284234136776080}
-  - component: {fileID: -2473322945964190887}
   - component: {fileID: 5252579528501902821}
   - component: {fileID: 3472360428555059503}
   - component: {fileID: -6311596435239005009}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Ball_Base
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -28,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3761516715085075885}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10000, y: 1000, z: 10000}
   m_LocalScale: {x: 0.24, y: 0.24, z: 0.24}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-2199284234136776080
 MonoBehaviour:
@@ -49,26 +48,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _visualTransform: {fileID: 0}
-  _ballSoundsPlayer: {fileID: -2473322945964190887}
   _visualTransformInitialScale: {x: 0.5, y: 0.5, z: 0.46}
   _visualTransformInitialRotation: {x: -60, y: 0, z: 0}
   _maxForceMagnitudeOnGroundCollision: 0.05
   _groundCollisionForceMode: 1
---- !u!114 &-2473322945964190887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3761516715085075885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a74df953c6e4681a0ecfc551a4d6039, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _groundHit: {fileID: 8300000, guid: 5ccdeaecb4f6a486ba6289cab269c83c, type: 3}
-  _maxGroundHitForce: 20
-  _bounceCloudHit: {fileID: 8300000, guid: b4020473a54a8402393a3d97425a26b0, type: 3}
 --- !u!136 &5252579528501902821
 CapsuleCollider:
   m_ObjectHideFlags: 0

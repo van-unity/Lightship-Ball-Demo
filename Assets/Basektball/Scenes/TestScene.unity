@@ -295,7 +295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Camera: {fileID: 1032099105}
   HitTestType: 8
-  PlacementObjectPf: {fileID: 6545985355756147631, guid: 21f98726196874d58838afb7c68b2583,
+  PlacementObjectPf: {fileID: 2519073242650905667, guid: 4103442b32af74fd584636fcaf16ad4e,
     type: 3}
 --- !u!114 &680458664
 MonoBehaviour:
@@ -346,7 +346,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &773086777
 MonoBehaviour:
   m_ObjectHideFlags: 0

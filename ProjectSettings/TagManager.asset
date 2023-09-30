@@ -19,6 +19,7 @@ TagManager:
   - RedGoal
   - BackboardSpot
   - Ground
+  - Cloud
   layers:
   - Default
   - TransparentFX
@@ -30,7 +31,7 @@ TagManager:
   - 
   - ARDK_MockWorld
   - Ball
-  - 
+  - Cloud
   - 
   - 
   - 
