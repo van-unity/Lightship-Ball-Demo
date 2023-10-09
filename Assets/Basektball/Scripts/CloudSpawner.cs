@@ -16,7 +16,7 @@ namespace Basektball.Scripts {
         private List<GameObject> _clouds;
         private float _timer;
 
-        private int _activeCloudsCount = 2;
+        private int _activeCloudsCount = 1;
 
         private void Start() {
             _clouds = new List<GameObject>(_cloudCount);
@@ -44,10 +44,9 @@ namespace Basektball.Scripts {
         }
 
         private Vector3 GetPositionInsideTheCube() {
-            var center = transform.position;
-            float randomX = center.x + Random.Range(-_length * 0.5f, _length * 0.5f);
-            float randomY = center.y + Random.Range(-_height * 0.5f, _height * 0.5f);
-            float randomZ = center.z + Random.Range(-_width * 0.5f, _width * 0.5f);
+            float randomX = Random.Range(-_length * 0.5f, _length * 0.5f);
+            float randomY = Random.Range(-_height * 0.5f, _height * 0.5f);
+            float randomZ = Random.Range(-_width * 0.5f, _width * 0.5f);
             Vector3 spawnPosition = new Vector3(randomX, randomY, randomZ);
 
             return spawnPosition;
@@ -61,9 +60,14 @@ namespace Basektball.Scripts {
 
             _timer = 0;
             
-            _activeCloudsCount = Random.Range(2, _cloudCount + 1);
+            _activeCloudsCount = Random.Range(1, _cloudCount + 1);
             for (int i = 0; i < _cloudCount; i++) {
-                _clouds[i].SetActive(i < _activeCloudsCount);
+                if (i < _activeCloudsCount) {
+                    _clouds[i].GetComponent<Cloud>().Show();
+                }
+                else {
+                    _clouds[i].GetComponent<Cloud>().Hide();
+                }
             }
         }
 

@@ -289,7 +289,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.75
+      scalar: 0.5625
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4844,6 +4844,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _oneMeterSpeed: 5
   _maxDelayBeforeNextPosition: 0.75
+  _punchAmount: -0.1
+  _punchDuration: 0.2
+  _punchEase: 9
+  _particleSystem: {fileID: 1113910518034008569}
+  _particlesSpeedRecoverDuration: 0.5
+  _particlesRecoverEase: 7
+  _particlesHideDuration: 0.5
+  _particlesHideEase: 7
+  _particlesHideSimulationSpeed: 6
 --- !u!135 &3719250395340439536
 SphereCollider:
   m_ObjectHideFlags: 0

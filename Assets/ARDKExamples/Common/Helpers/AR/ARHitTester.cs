@@ -20,6 +20,7 @@ namespace Niantic.ARDKExamples.Helpers {
         /// The camera used to render the scene. Used to get the center of the screen.
         public Camera Camera;
 
+        public ARCursorRenderer _arCursorRenderer;
         /// The types of hit test results to filter against when performing a hit test.
         [EnumFlagAttribute] public ARHitTestResultType HitTestType = ARHitTestResultType.ExistingPlane;
 
@@ -110,9 +111,11 @@ namespace Niantic.ARDKExamples.Helpers {
                 return;
             }
 
+            _arCursorRenderer.Stop();
+            
             _isntantiated = true;
 
-            _placedObjects.Add(Instantiate(PlacementObjectPf, hitPosition, Quaternion.identity));
+            _placedObjects.Add(Instantiate(PlacementObjectPf, hitPosition, _arCursorRenderer.GetRotation()));
 
             var anchor = result.Anchor;
             Debug.LogFormat

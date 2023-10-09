@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Threading.Tasks;
+using Basektball.Scripts;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
@@ -7,7 +9,7 @@ using Random = UnityEngine.Random;
 namespace Ballerz.Presentation {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(CapsuleCollider))]
-    public class Ball : MonoBehaviour,  IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler {
+    public class Ball : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler {
         private Rigidbody _rigidbody;
         private CapsuleCollider _collider;
         private Transform _transform;
@@ -28,6 +30,7 @@ namespace Ballerz.Presentation {
         private Vector3 _screenPosition;
 
         public static event Action<Ball> TriggeredWithCloud;
+        public static event Action<Ball> Goal;
 
         public Vector3 Position {
             get => _transform.position;
@@ -95,9 +98,23 @@ namespace Ballerz.Presentation {
                 Rigidbody.velocity = Vector3.zero;
                 Rigidbody.AddForce(velocity, ForceMode.Impulse);
             }
-            else if(other.CompareTag("Cloud")) {
-                TriggeredWithCloud?.Invoke(this);
+            else if (other.CompareTag("Cloud")) {
+                StartCoroutine(WaitAndCall(.1f, () => {
+                    other.GetComponent<Cloud>().Bounce();
+                    TriggeredWithCloud?.Invoke(this);
+                }));
             }
+            else if (other.CompareTag("Goal")) {
+                if (other.transform.position.y < Transform.position.y) {
+                    Goal?.Invoke(this);
+                }
+            }
+        }
+
+        private IEnumerator WaitAndCall(float seconds, Action callback) {
+            yield return new WaitForSeconds(seconds);
+
+            callback?.Invoke();
         }
 
         private void OnCollisionEnter(Collision collision) {
@@ -120,7 +137,6 @@ namespace Ballerz.Presentation {
                     _maxForceMagnitudeOnGroundCollision,
                     _groundCollisionForceMode);
             }
-
         }
 
         private async void WaitOneFrameAndMultiplyVelocity(float multiplier) {

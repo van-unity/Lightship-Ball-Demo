@@ -1,9 +1,9 @@
 // Copyright 2022 Niantic, Inc. All Rights Reserved.
 
 using System.Collections.Generic;
-using Auki.ConjureKit;
-using Auki.ConjureKit.Manna;
-using Auki.Util;
+// using Auki.ConjureKit;
+// using Auki.ConjureKit.Manna;
+// using Auki.Util;
 using Niantic.ARDK.AR;
 using Niantic.ARDK.AR.ARSessionEventArgs;
 using Niantic.ARDK.AR.HitTest;
@@ -26,8 +26,8 @@ namespace Basektball.Scripts {
         [SerializeField] private TextMeshProUGUI sessionState;
         [SerializeField] private TextMeshProUGUI sessionID;
         public RawImage _rawImage;
-        private IConjureKit _conjureKit;
-        private Manna _manna;
+        // private IConjureKit _conjureKit;
+        // private Manna _manna;
 
 
         /// The camera used to render the scene. Used to get the center of the screen.
@@ -54,37 +54,37 @@ namespace Basektball.Scripts {
         }
 
         private void StartConjureKit() {
-            _conjureKit = new ConjureKit(
-                Camera.transform,
-                "d69fb2b9-3e83-47c8-95a2-26a12796e2e1",
-                "6764b692-e8d0-4a07-baff-c0804d4b4ece96254774-50a1-4818-b96b-0992cacb8a2");
-
-            _manna = new Manna(_conjureKit);
-
-            _conjureKit.OnStateChanged += state => { sessionState.text = state.ToString(); };
-
-            _conjureKit.OnJoined += session => { sessionID.text = session.Id.ToString(); };
-
-            _conjureKit.OnLeft += () => { sessionID.text = ""; };
-
-            _manna.OnLighthouseTracked += OnLighthouseTracked;
-
-
-            _conjureKit.Connect();
+            // _conjureKit = new ConjureKit(
+            //     Camera.transform,
+            //     "d69fb2b9-3e83-47c8-95a2-26a12796e2e1",
+            //     "6764b692-e8d0-4a07-baff-c0804d4b4ece96254774-50a1-4818-b96b-0992cacb8a2");
+            //
+            // _manna = new Manna(_conjureKit);
+            //
+            // _conjureKit.OnStateChanged += state => { sessionState.text = state.ToString(); };
+            //
+            // _conjureKit.OnJoined += session => { sessionID.text = session.Id.ToString(); };
+            //
+            // _conjureKit.OnLeft += () => { sessionID.text = ""; };
+            //
+            // _manna.OnLighthouseTracked += OnLighthouseTracked;
+            //
+            //
+            // _conjureKit.Connect();
         }
 
         private GameObject _basket;
 
-        private void OnLighthouseTracked(Lighthouse arg1, Pose arg2, bool arg3) {
-            if (_basket == null) {
-                _basket = Instantiate(PlacementObjectPf, arg2.position, arg2.rotation);
-                _placedObjects.Add(_basket);
-            }
-            else {
-                _basket.transform.position = arg2.position;
-                _basket.transform.rotation = arg2.rotation;
-            }
-        }
+        // private void OnLighthouseTracked(Lighthouse arg1, Pose arg2, bool arg3) {
+        //     if (_basket == null) {
+        //         _basket = Instantiate(PlacementObjectPf, arg2.position, arg2.rotation);
+        //         _placedObjects.Add(_basket);
+        //     }
+        //     else {
+        //         _basket.transform.position = arg2.position;
+        //         _basket.transform.rotation = arg2.rotation;
+        //     }
+        // }
 
 
         private void OnAnyARSessionDidInitialize(AnyARSessionInitializedArgs args) {
@@ -130,13 +130,13 @@ namespace Basektball.Scripts {
         }
 
         private void FeedMannaWithVideoFrames() {
-            var texture = FindObjectOfType<ARRenderingManager>().GPUTexture;
-            _rawImage.texture = texture;
-            _manna.ProcessVideoFrameTexture(
-                texture,
-                Camera.projectionMatrix,
-                Camera.worldToCameraMatrix
-            );
+            // var texture = FindObjectOfType<ARRenderingManager>().GPUTexture;
+            // _rawImage.texture = texture;
+            // _manna.ProcessVideoFrameTexture(
+            //     texture,
+            //     Camera.projectionMatrix,
+            //     Camera.worldToCameraMatrix
+            // );
         }
 
         private void TouchBegan(Touch touch) {
