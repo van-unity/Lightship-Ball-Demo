@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Ballerz.Presentation;
 using DG.Tweening;
+using Niantic.ARDKExamples.Helpers;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -24,6 +25,7 @@ namespace Basektball.Scripts {
         public string _cloudTag;
         public GameObject _tapToPlace;
         public GameObject _tooClose;
+        public GameplayUiController _uiController;
 
         private List<Ball> _balls;
         private Vector2 _startTouchPosition;
@@ -31,9 +33,15 @@ namespace Basektball.Scripts {
         private Ball _currentBall;
 
         private Transform _mainCameraTransform;
+        private int _score;
+        private int _timer;
 
         private void Awake() {
             Application.targetFrameRate = 60;
+            _score = 0;
+            _timer = 60;
+            _uiController.UpdateScore(_score.ToString());
+            _uiController.UpdateTimer(_timer.ToString());
         }
 
         private IEnumerator Start() {
@@ -52,29 +60,58 @@ namespace Basektball.Scripts {
             Ball.TriggeredWithCloud += BallOnTriggeredWithCloud;
             Ball.Goal += BallOnGoal;
             StartCoroutine(CheckForDistance());
+            StartCoroutine(Timer());
+
+            _uiController.Pause += UiControllerOnPause;
+        }
+
+        private bool _isPaused;
+
+        private void UiControllerOnPause(bool obj) {
+            _isPaused = obj;
+        }
+
+        private IEnumerator Timer() {
+            while (_timer > 0) {
+                yield return _oneSeconds;
+                while (_isPaused) {
+                    yield return null;
+                }
+
+                _timer -= 1;
+                _uiController.UpdateTimer(_timer.ToString());
+            }
+
+            _uiController.ShowGameOver();
         }
 
         private void BallOnGoal(Ball obj) {
             var distance = Vector3.Distance(Camera.main.transform.position, _hoopManager.GetHoopPosition());
 
             if (distance <= 2) {
+                _score += 1;
+                _uiController.UpdateScore(_score.ToString());
                 _1.Animate(_hoopManager.GetHoopPosition());
             }
             else if (distance <= 3) {
+                _score += 2;
+                _uiController.UpdateScore(_score.ToString());
                 _2.Animate(_hoopManager.GetHoopPosition());
             }
             else {
+                _score += 3;
+                _uiController.UpdateScore(_score.ToString());
                 _3.Animate(_hoopManager.GetHoopPosition());
             }
         }
 
         public float _minDistance = 1;
-        public YieldInstruction _distanceCheckInstructon = new WaitForSeconds(1f);
+        public YieldInstruction _oneSeconds = new WaitForSeconds(1f);
 
         private IEnumerator CheckForDistance() {
             var camTrans = Camera.main.transform;
             while (true) {
-                yield return _distanceCheckInstructon;
+                yield return _oneSeconds;
                 var distance = Vector3.Distance(camTrans.position, _hoopManager.GetIdealShotPosition());
                 if (distance < _minDistance) {
                     _tooClose.SetActive(true);
@@ -82,8 +119,6 @@ namespace Basektball.Scripts {
                 else {
                     _tooClose.SetActive(false);
                 }
-
-                _cloudSpawner.transform.position = _mainCameraTransform.position + _cloudSpawnerOffset;
             }
         }
 
@@ -278,6 +313,23 @@ namespace Basektball.Scripts {
 
         private void OnDestroy() {
             Ball.TriggeredWithCloud -= BallOnTriggeredWithCloud;
+            Ball.Goal -= BallOnGoal;
+        }
+
+        public void RestartGame() {
+            FindObjectOfType<ARHitTester>().ResetHitTester();
+            foreach (Ball ball in _balls) {
+                DestroyImmediate(ball.gameObject);
+            }
+            Destroy(gameObject.transform.root.gameObject);
+        }
+
+        public void PlayAgain() {
+            FindObjectOfType<ARHitTester>().ResetHitTester();
+            foreach (Ball ball in _balls) {
+                DestroyImmediate(ball.gameObject);
+            }
+            Destroy(gameObject.transform.root.gameObject);
         }
     }
 }

@@ -12,7 +12,19 @@ EditorBuildSettings:
     path: Assets/Basektball/Scenes/TestScene.unity
     guid: 9fb06bf01671e421987836fbcccfe863
   m_configObjects:
+    Niantic.Lightship.AR.LightshipSettings: {fileID: 11400000, guid: 8cf4b1d99bb25446c804e5b487c94258,
+      type: 2}
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 7922b770ae9424e1bb1e86264546e73e,
+      type: 2}
+    UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: d80b6ab96af034feb932f58e9132d4d1,
+      type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 1bd50a68174aa41fc97075f198c37cc8,
       type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
       guid: 9a0aa5fe5d81a4a8ab6135c640e8e8f6, type: 2}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: b99e9bdcf6de94b7cac2aa2012ddc6f5,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 1f88cbb2cbbc2433b81c8826a14f9cad,
+      type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: a71e11025fb3547edb7b7713cb20c3a9,
+      type: 2}

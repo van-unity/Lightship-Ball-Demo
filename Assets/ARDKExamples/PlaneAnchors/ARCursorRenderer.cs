@@ -31,6 +31,11 @@ namespace Niantic.ARDKExamples.Helpers {
             enabled = false;
         }
 
+        public void Unstop() {
+            _spawnedCursorObject.SetActive(true);
+            enabled = true;
+        }
+
         public Quaternion GetRotation() {
             return _spawnedCursorObject.transform.rotation;
         }
@@ -103,12 +108,12 @@ namespace Niantic.ARDKExamples.Helpers {
                 _spawnedCursorObject = Instantiate(CursorObject, Vector2.one, Quaternion.identity);
 
             var hitPos = hitTestResults[0].WorldTransform.ToPosition();
-            if (Vector3.Distance(Camera.transform.position, hitPos) > 1) {
-                hitPos.z = _spawnedCursorObject.transform.position.z;
+            if (Vector3.Distance(Camera.transform.position, hitPos) > 3) {
+                hitPos.z = Camera.transform.position.z + 3;
             }
 
             // Set the cursor object to the hit test result's position
-            _spawnedCursorObject.transform.position = hitTestResults[0].WorldTransform.ToPosition();
+            _spawnedCursorObject.transform.position = hitPos;
 
             // Orient the cursor object to look at the user, but remain flat on the "ground", aka
             // only rotate about the y-axis

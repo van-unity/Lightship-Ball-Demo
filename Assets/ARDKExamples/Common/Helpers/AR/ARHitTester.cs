@@ -127,5 +127,10 @@ namespace Niantic.ARDKExamples.Helpers {
                     : anchor.AnchorType + " " + anchor.Identifier
             );
         }
+
+        public void ResetHitTester() {
+            _isntantiated = false;
+            _arCursorRenderer.Unstop();
+        }
     }
 }
