@@ -1,5 +1,6 @@
 // Copyright 2022 Niantic, Inc. All Rights Reserved.
 
+using System;
 using System.Collections.Generic;
 using Niantic.ARDK.AR;
 using Niantic.ARDK.AR.ARSessionEventArgs;
@@ -32,6 +33,8 @@ namespace Niantic.ARDKExamples.Helpers {
 
         /// Internal reference to the session, used to get the current frame to hit test against.
         private IARSession _session;
+        
+        public event Action<GameObject> OnObjectPlaced;
 
         private void Start() {
             ARSessionFactory.SessionInitialized += OnAnyARSessionDidInitialize;
@@ -115,7 +118,10 @@ namespace Niantic.ARDKExamples.Helpers {
             
             _isntantiated = true;
 
-            _placedObjects.Add(Instantiate(PlacementObjectPf, hitPosition, _arCursorRenderer.GetRotation()));
+            var placedObject = Instantiate(PlacementObjectPf, hitPosition, _arCursorRenderer.GetRotation());
+            _placedObjects.Add(placedObject);
+            
+            OnObjectPlaced?.Invoke(placedObject);
 
             var anchor = result.Anchor;
             Debug.LogFormat

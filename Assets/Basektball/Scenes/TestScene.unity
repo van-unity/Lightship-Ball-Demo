@@ -596,6 +596,54 @@ MonoBehaviour:
   HitTestType: 16
   PlacementObjectPf: {fileID: 3323945199711504880, guid: 2c786d81498b24631868ebafb99fd4e6,
     type: 3}
+--- !u!1 &1508260039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1508260041}
+  - component: {fileID: 1508260040}
+  m_Layer: 0
+  m_Name: CnjureKitWrapper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1508260040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508260039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13d4a2bc6a0c24aa59940cd67735eba6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arCamera: {fileID: 1032099105}
+  arHitTester: {fileID: 680458663}
+  basketballGamePrefab: {fileID: 2519073242650905667, guid: 4103442b32af74fd584636fcaf16ad4e,
+    type: 3}
+--- !u!4 &1508260041
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508260039}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &3025762412887508830
 Transform:
   m_ObjectHideFlags: 0
@@ -730,3 +778,4 @@ SceneRoots:
   - {fileID: 1467672217}
   - {fileID: 1401806845}
   - {fileID: 1077321714}
+  - {fileID: 1508260041}
