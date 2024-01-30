@@ -20,6 +20,7 @@ TagManager:
   - BackboardSpot
   - Ground
   - Cloud
+  - hoop-hit
   layers:
   - Default
   - TransparentFX

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Ballerz.Presentation;
 using DG.Tweening;
-using Niantic.ARDKExamples.Helpers;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -187,7 +186,8 @@ namespace Basektball.Scripts {
                     Vector2 swipeDirection =
                         new Vector2(swipeDelta.x / Screen.width, swipeDelta.y / (Screen.height * .6f));
                     _currentBall.transform.SetParent(null);
-                    ApplyForce(new Vector3(swipeDirection.x, swipeDirection.y, swipeDirection.y));
+                    // ApplyForce(new Vector3(swipeDirection.x, swipeDirection.y, swipeDirection.y));
+                    StartThrow(new Vector3(swipeDirection.x, swipeDirection.y, swipeDirection.y));
                     _currentBall.VisualTransform.DOScale(1, .2f).SetEase(Ease.InOutQuad);
                     _currentBall = null;
                     StartCoroutine(WaitAndGetNextBall());
@@ -204,6 +204,8 @@ namespace Basektball.Scripts {
                 _currentBall.Rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
                 _currentBall.Rigidbody.AddForce(force, ForceMode.Impulse);
                 _currentBall.VisualTransform.DOScale(1, .2f).SetEase(Ease.InOutQuad);
+                FindObjectOfType<ConjureKitWrapper>()
+                    .Throw(new Pose(_currentBall.Transform.position, _currentBall.Transform.rotation), force);
                 StartCoroutine(ReleaseBall(_currentBall));
                 _currentBall = null;
                 StartCoroutine(WaitAndGetNextBall());
@@ -227,7 +229,8 @@ namespace Basektball.Scripts {
             return force;
         }
 
-        private void ApplyForce(Vector3 direction) {
+        public void ApplyForce(Vector3 direction, Vector3 position) {
+            _currentBall.Transform.position = position;
             var force = new Vector3(direction.x, direction.y * _yMultiplier,
                 direction.z * _zMultiplier); // Assuming Y is up. Adjust as needed.
             _currentBall.Rigidbody.useGravity = true;
@@ -237,6 +240,11 @@ namespace Basektball.Scripts {
                 ForceMode.VelocityChange); // forceMultiplier is a public float to adjust the magnitude of the force applied.
             _hoopManager.AddBallCollider(_currentBall.Collider);
             StartCoroutine(ReleaseBall(_currentBall));
+        }
+
+        private void StartThrow(Vector3 direction) {
+            FindObjectOfType<ConjureKitWrapper>()
+                .Throw(new Pose(_currentBall.Transform.position, _currentBall.Transform.rotation), direction);
         }
 
         private IEnumerator ReleaseBall(Ball ball) {
@@ -317,18 +325,18 @@ namespace Basektball.Scripts {
         }
 
         public void RestartGame() {
-            FindObjectOfType<ARHitTester>().ResetHitTester();
             foreach (Ball ball in _balls) {
                 DestroyImmediate(ball.gameObject);
             }
+
             Destroy(gameObject.transform.root.gameObject);
         }
 
         public void PlayAgain() {
-            FindObjectOfType<ARHitTester>().ResetHitTester();
             foreach (Ball ball in _balls) {
                 DestroyImmediate(ball.gameObject);
             }
+
             Destroy(gameObject.transform.root.gameObject);
         }
     }

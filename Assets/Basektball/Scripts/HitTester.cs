@@ -4,13 +4,6 @@ using System.Collections.Generic;
 // using Auki.ConjureKit;
 // using Auki.ConjureKit.Manna;
 // using Auki.Util;
-using Niantic.ARDK.AR;
-using Niantic.ARDK.AR.ARSessionEventArgs;
-using Niantic.ARDK.AR.HitTest;
-using Niantic.ARDK.Extensions;
-using Niantic.ARDK.External;
-using Niantic.ARDK.Utilities;
-using Niantic.ARDK.Utilities.Input.Legacy;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,7 +27,7 @@ namespace Basektball.Scripts {
         public Camera Camera;
 
         /// The types of hit test results to filter against when performing a hit test.
-        [EnumFlag] public ARHitTestResultType HitTestType = ARHitTestResultType.ExistingPlane;
+        // [EnumFlag] public ARHitTestResultType HitTestType = ARHitTestResultType.ExistingPlane;
 
         /// The object we will place when we get a valid hit test result!
         public GameObject PlacementObjectPf;
@@ -43,13 +36,13 @@ namespace Basektball.Scripts {
         private List<GameObject> _placedObjects = new List<GameObject>();
 
         /// Internal reference to the session, used to get the current frame to hit test against.
-        private IARSession _session;
+        // private IARSession _session;
 
         
         
         
         private void Start() {
-            ARSessionFactory.SessionInitialized += OnAnyARSessionDidInitialize;
+            // ARSessionFactory.SessionInitialized += OnAnyARSessionDidInitialize;
             StartConjureKit();
         }
 
@@ -87,19 +80,19 @@ namespace Basektball.Scripts {
         // }
 
 
-        private void OnAnyARSessionDidInitialize(AnyARSessionInitializedArgs args) {
-            _session = args.Session;
-            _session.Deinitialized += OnSessionDeinitialized;
-        }
-
-        private void OnSessionDeinitialized(ARSessionDeinitializedArgs args) {
-            ClearObjects();
-        }
+        // private void OnAnyARSessionDidInitialize(AnyARSessionInitializedArgs args) {
+        //     _session = args.Session;
+        //     _session.Deinitialized += OnSessionDeinitialized;
+        // }
+        //
+        // private void OnSessionDeinitialized(ARSessionDeinitializedArgs args) {
+        //     ClearObjects();
+        // }
 
         private void OnDestroy() {
-            ARSessionFactory.SessionInitialized -= OnAnyARSessionDidInitialize;
+            // ARSessionFactory.SessionInitialized -= OnAnyARSessionDidInitialize;
 
-            _session = null;
+            // _session = null;
 
             ClearObjects();
         }
@@ -113,9 +106,9 @@ namespace Basektball.Scripts {
         }
 
         private void Update() {
-            if (_session == null) {
-                return;
-            }
+            // if (_session == null) {
+            //     return;
+            // }
 
             FeedMannaWithVideoFrames();
 
@@ -139,45 +132,45 @@ namespace Basektball.Scripts {
             // );
         }
 
-        private void TouchBegan(Touch touch) {
-            var currentFrame = _session.CurrentFrame;
-            if (currentFrame == null) {
-                return;
-            }
-
-            if (touch.IsTouchOverUIObject())
-                return;
-
-            var results = currentFrame.HitTest
-            (
-                Camera.pixelWidth,
-                Camera.pixelHeight,
-                touch.position,
-                HitTestType
-            );
-
-            int count = results.Count;
-            Debug.Log("Hit test results: " + count);
-
-            if (count <= 0)
-                return;
-
-            // Get the closest result
-            var result = results[0];
-
-            var hitPosition = result.WorldTransform.ToPosition();
-
-            _placedObjects.Add(Instantiate(PlacementObjectPf, hitPosition, Quaternion.identity));
-
-            var anchor = result.Anchor;
-            Debug.LogFormat
-            (
-                "Spawning cube at {0} (anchor: {1})",
-                hitPosition.ToString("F4"),
-                anchor == null
-                    ? "none"
-                    : anchor.AnchorType + " " + anchor.Identifier
-            );
-        }
+        // private void TouchBegan(Touch touch) {
+        //     var currentFrame = _session.CurrentFrame;
+        //     if (currentFrame == null) {
+        //         return;
+        //     }
+        //
+        //     if (touch.IsTouchOverUIObject())
+        //         return;
+        //
+        //     var results = currentFrame.HitTest
+        //     (
+        //         Camera.pixelWidth,
+        //         Camera.pixelHeight,
+        //         touch.position,
+        //         HitTestType
+        //     );
+        //
+        //     int count = results.Count;
+        //     Debug.Log("Hit test results: " + count);
+        //
+        //     if (count <= 0)
+        //         return;
+        //
+        //     // Get the closest result
+        //     var result = results[0];
+        //
+        //     var hitPosition = result.WorldTransform.ToPosition();
+        //
+        //     _placedObjects.Add(Instantiate(PlacementObjectPf, hitPosition, Quaternion.identity));
+        //
+        //     var anchor = result.Anchor;
+        //     Debug.LogFormat
+        //     (
+        //         "Spawning cube at {0} (anchor: {1})",
+        //         hitPosition.ToString("F4"),
+        //         anchor == null
+        //             ? "none"
+        //             : anchor.AnchorType + " " + anchor.Identifier
+        //     );
+        // }
     }
 }

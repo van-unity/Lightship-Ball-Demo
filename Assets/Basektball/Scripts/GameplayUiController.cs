@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Basektball.Scripts;
-using Niantic.ARDKExamples.Helpers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 74014608945753068}
   m_Layer: 0
   m_Name: Hoop_Hit
-  m_TagString: Untagged
+  m_TagString: hoop-hit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
